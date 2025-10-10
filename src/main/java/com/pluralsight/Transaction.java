@@ -38,4 +38,20 @@ public class Transaction {
     public double getAmount() {
         return amount;
     }
+
+
+/*
+   @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Transaction{");
+        sb.append("date='").append(date).append('\'');
+        sb.append(", time='").append(time).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", vendor='").append(vendor).append('\'');
+        sb.append(", amount=").append(amount);
+        sb.append('}');
+        return sb.toString();
+    }
+*/
+
 }
