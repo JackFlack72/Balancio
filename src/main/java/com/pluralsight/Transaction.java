@@ -39,9 +39,8 @@ public class Transaction {
         return amount;
     }
 
-
 /*
-   @Override
+    @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Transaction{");
         sb.append("date='").append(date).append('\'');
@@ -51,6 +50,13 @@ public class Transaction {
         sb.append(", amount=").append(amount);
         sb.append('}');
         return sb.toString();
+    }
+*/
+/*
+   @Override
+    public String toString() {
+        return String.format("%s|%s|%s|%s|%.2f",
+        this.date, this.time, this.description, this.vendor, this.amount);
     }
 */
 
