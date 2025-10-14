@@ -1,7 +1,9 @@
 package com.pluralsight;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,52 +14,13 @@ public class AccountingTransactionApplication {
 
     public static void main(String[] args) {
 
-       //ArrayList<Transaction> employees = readTransactions();
-/*
-        for (Employee employee: employees) {
-            System.out.println(employee);
+       ArrayList<Transaction> transaction = readTransactions();
+
+        for (Transaction t: transaction) {
+            System.out.println(t);
         }
-*/
+
     }
-/*
-    private static void readTransactions() {
-
-        //File not exists code goes here
-
-        try {
-            // create a FileReader object connected to the File
-            FileReader fileReader = new FileReader("transactions.csv");
-            // create a BufferedReader to manage input stream
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line;
-
-            //skip header line
-            bufferedReader.readLine();
-
-
-            // read until there is no more data
-            while ((line = bufferedReader.readLine()) != null) {
-//                System.out.println(line);
-                String[] parts = line.split(Pattern.quote("|"));
-
-                Transaction transaction = new Transaction();
-
-                String date = parts[0];
-                String time = parts[1];
-                String description = parts[2];
-                String vendor = parts[3];
-                double amount = Double.parseDouble(parts[4]);
-
-            }
-            // close the stream and release the resources
-            bufferedReader.close();
-        } catch (IOException e) {
-            // display stack trace if there was an error
-            e.printStackTrace();
-        }
-
-        return employees;
-*/
 
     private static ArrayList<Transaction> readTransactions() {
         ArrayList<Transaction> list = new ArrayList<>();
@@ -74,20 +37,27 @@ public class AccountingTransactionApplication {
 
             // read until there is no more data
             while ((line = bufferedReader.readLine()) != null) {
-//                System.out.println(line);
                 String[] parts = line.split(Pattern.quote("|"));
 
                 Transaction transaction = new Transaction();
 
-                String date = parts[0];
+                String dateAsString = parts[0];
+                LocalDate date = LocalDate.parse(dateAsString);
+                transaction.setDate(date);
 
-                String time = parts[1];
+                String timeAsString = parts[1];
+                LocalTime time = LocalTime.parse(timeAsString);
+                transaction.setTime(time);
 
                 String description = parts[2];
+                transaction.setDescription(description);
 
                 String vendor = parts[3];
+                transaction.setVendor(vendor);
 
-                double amount = Double.parseDouble(parts[4]);
+                String amountAsString = parts[4];
+                double amount = Double.parseDouble(amountAsString);
+                transaction.setAmount(amount);
 
                 list.add(transaction);
             }
@@ -100,7 +70,7 @@ public class AccountingTransactionApplication {
         return list;
     }
 
-
+/*
     public static void homeScreen() {
         boolean running = true;
 
@@ -121,7 +91,7 @@ public class AccountingTransactionApplication {
                     makePayment();
                     break;
                 case "L":
-                    displayLedger();
+                    displayLedgerScreen();
                     break;
                 case "X":
                     System.out.println("Exiting... Goodbye!");
@@ -182,7 +152,7 @@ public class AccountingTransactionApplication {
         }
     }
 
-    public static void ledgerScreen() {
+    public static void displayLedgerScreen() {
         while (true) {
             System.out.println("\n--- LEDGER SCREEN ---");
             System.out.println("A) All Entries");
@@ -192,7 +162,8 @@ public class AccountingTransactionApplication {
             System.out.println("H) Home Screen");
             System.out.println("Choose an option:  ");
 
-            String
+
         }
     }
+*/
 }
