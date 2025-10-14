@@ -40,9 +40,6 @@ public class Transaction {
     }
 
 
-
-
-
 /*
     @Override
     public String toString() {
@@ -64,4 +61,16 @@ public class Transaction {
     }
 */
 
+//Determines if display is Deposit or Payment
+    public String getTypeOfTransaction() {
+        if (this.amount >= 0) {
+            return "DEPOSIT";
+        } else {
+            return "PAYMENT";
+        }
+    }
+
+    public String toString() {
+        return this.date + "|" + this.time + "|" + this.description + "|" + this.vendor + "|" + this.amount;
+    }
 }

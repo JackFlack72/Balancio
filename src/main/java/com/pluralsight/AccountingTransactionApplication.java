@@ -12,20 +12,21 @@ public class AccountingTransactionApplication {
 
     public static void main(String[] args) {
 
-       ArrayList<Employee> employees = readEmployees();
-
+       //ArrayList<Transaction> employees = readTransactions();
+/*
         for (Employee employee: employees) {
             System.out.println(employee);
         }
-
+*/
     }
+/*
+    private static void readTransactions() {
 
-    private static ArrayList<Employee> readEmployees() {
-        ArrayList<Employee> employees = new ArrayList<>();
+        //File not exists code goes here
 
         try {
             // create a FileReader object connected to the File
-            FileReader fileReader = new FileReader("employees.csv");
+            FileReader fileReader = new FileReader("transactions.csv");
             // create a BufferedReader to manage input stream
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
@@ -39,36 +40,13 @@ public class AccountingTransactionApplication {
 //                System.out.println(line);
                 String[] parts = line.split(Pattern.quote("|"));
 
+                Transaction transaction = new Transaction();
 
-                Employee employee = new Employee();
-
-                String employeeIdAsString = parts[0];
-                int employeeId = Integer.parseInt(employeeIdAsString);
-                employee.setEmployeeId(employeeId);
-//                OR
-//                  employee.setEmployeeId(Integer.parseInt(parts[0]));
-
-                String name = parts[1];
-                employee.setName(name);
-//                OR
-//                employee.setName(parts[1]);
-
-
-                String hoursWorkedAsString = parts[2];
-                double hoursWorked = Double.parseDouble(hoursWorkedAsString);
-                employee.setHoursWorked(hoursWorked);
-//                OR
-//                employee.setHoursWorked(Double.parseDouble(parts[2]));
-
-
-                String payRateAsString = parts[3];
-                double payRate = Double.parseDouble(payRateAsString);
-                employee.setPayRate(payRate);
-//                OR
-//                employee.setPayRate(Double.parseDouble(parts[3]));
-
-                employees.add(employee) ;
-//                System.out.println(employee);
+                String date = parts[0];
+                String time = parts[1];
+                String description = parts[2];
+                String vendor = parts[3];
+                double amount = Double.parseDouble(parts[4]);
 
             }
             // close the stream and release the resources
@@ -79,7 +57,42 @@ public class AccountingTransactionApplication {
         }
 
         return employees;
+*/
+/*
+    private static ArrayList<Transaction> readTransactions() {
+        ArrayList<Transaction> list = new ArrayList<>();
+        try {
+            // create a FileReader object connected to the File
+            FileReader fileReader = new FileReader("transactions.csv");
+            // create a BufferedReader to manage input stream
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+
+            //skip header line
+            bufferedReader.readLine();
 
 
+            // read until there is no more data
+            while ((line = bufferedReader.readLine()) != null) {
+//                System.out.println(line);
+                String[] parts = line.split(Pattern.quote("|"));
+
+                Transaction transaction = new Transaction();
+
+                String date = parts[0];
+                String time = parts[1];
+                String description = parts[2];
+                String vendor = parts[3];
+                double amount = Double.parseDouble(parts[4]);
+
+            }
+            // close the stream and release the resources
+            bufferedReader.close();
+        } catch (IOException e) {
+            // display stack trace if there was an error
+            e.printStackTrace();
+        }
     }
+*/
+
 }
