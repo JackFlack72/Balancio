@@ -70,7 +70,7 @@ public class AccountingTransactionApplication {
         return list;
     }
 
-/*
+
     public static void homeScreen() {
         boolean running = true;
 
@@ -130,21 +130,20 @@ public class AccountingTransactionApplication {
                 amount = Math.abs(amount);
             }
             LocalDateTime now = LocalDateTime.now();
-            String date = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            String time = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+            LocalDate date = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalTime time = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 
             Transaction newT = new Transaction(date, time, description, vendor, amount);
-            try {
-                // create a FileWriter
-                FileWriter fileWriter = new FileWriter("transactions.csv", true);
-                // create a BufferedWriter
-                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                // write to the file
-                bufferedWriter.write(newT.toString());
-                bufferedWriter.newLine();
-                // close the writer
-                bufferedWriter.close();
-            }
+            // create a FileWriter
+            FileWriter fileWriter = new FileWriter("transactions.csv", true);
+            // create a BufferedWriter
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            // write to the file
+            bufferedWriter.write(newT.toString());
+            bufferedWriter.newLine();
+            // close the writer
+            bufferedWriter.close();
+
             System.out.println("Recorded: " + newT.toString());
         } catch (IOException e) {
             System.out.println("ERROR: An unexpected error occurred");
@@ -165,5 +164,5 @@ public class AccountingTransactionApplication {
 
         }
     }
-*/
+//*/
 }

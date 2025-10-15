@@ -1,17 +1,26 @@
+// Package structure: This organizes our code files.
 package com.pluralsight;
 
+// --- Imports: Bringing in necessary tools ---
+import java.time.LocalDate; // Tool for handling the date component.
+import java.time.LocalTime; // Tool for handling the time component.
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
+// --- Class Definition: The blueprint for a Transaction object ---
 public class Transaction {
+
+    // --- Private Fields: Encapsulated Data ---
+    // These five fields represent the data stored by every single Transaction object.
+    // 'private' ensures data integrity (Encapsulation).
     private LocalDate date;
     private LocalTime time;
     private String description;
     private String vendor;
-    private double amount;
+    private double amount;       // Stored as a 'double' for precision.
 
+    // --- Constructor 1: Full-Parameter Initialization ---
+    // Used to create a Transaction object with all data provided at once.
     public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount) {
+        // 'this.' distinguishes the class field from the local parameter.
         this.date = date;
         this.time = time;
         this.description = description;
@@ -19,6 +28,8 @@ public class Transaction {
         this.amount = amount;
     }
 
+    // --- Constructor 2: Default Initialization (Empty) ---
+    // Allows creation of an object with default/zeroed values, to be set later.
     public Transaction() {
         this.date = null;
         this.time = null;
@@ -26,6 +37,10 @@ public class Transaction {
         this.vendor = "";
         this.amount = 0;
     }
+
+    // -------------------------------------------------------------------
+    // --- Getters (Accessors): Read-Only access to private data ---
+    // These methods provide the only *public* way to read the data.
 
     public LocalDate getDate() {
         return date;
@@ -47,6 +62,10 @@ public class Transaction {
         return amount;
     }
 
+    // -------------------------------------------------------------------
+    // --- Setters (Mutators): Write access to private data ---
+    // These methods allow the object's state to be modified safely.
+
     public void setDate(LocalDate date) {
         this.date = date;
     }
@@ -66,37 +85,21 @@ public class Transaction {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-/*
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("Transaction{");
-        sb.append("date='").append(date).append('\'');
-        sb.append(", time='").append(time).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append(", vendor='").append(vendor).append('\'');
-        sb.append(", amount=").append(amount);
-        sb.append('}');
-        return sb.toString();
-    }
-*/
-/*
-   @Override
-    public String toString() {
-        return String.format("%s|%s|%s|%s|%.2f",
-        this.date, this.time, this.description, this.vendor, this.amount);
-    }
-*/
 
-//Determines if display is Deposit or Payment
+    // --- Business Logic: Transaction Type Classification ---
+    // This method determines the transaction type based on the amount's sign.
     public String getTypeOfTransaction() {
         if (this.amount >= 0) {
-            return "DEPOSIT";
+            return "DEPOSIT"; // Amount is positive or zero.
         } else {
-            return "PAYMENT";
+            return "PAYMENT"; // Amount is negative.
         }
     }
 
+    // --- toString() Override: Printable Representation ---
+    // Overrides the default method to provide a custom, human-readable string.
     public String toString() {
+        // Formats the data into a pipe-separated string for easy output/storage.
         return this.date + "|" + this.time + "|" + this.description + "|" + this.vendor + "|" + this.amount;
     }
 }
