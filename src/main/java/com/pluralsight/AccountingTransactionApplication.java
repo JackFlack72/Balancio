@@ -351,16 +351,16 @@ public class AccountingTransactionApplication {
         System.out.println("\n--- Vendor Results: " + vendorSearch + "---");
         boolean found = false;
 
-        System.out.println("Date\t\tTime\t\tDescription\t\tVendor\t\tAmount");
+        System.out.println("Date|Time|Description|Vendor|Amount");
 
         for (Transaction t: allTransactions) {
             // Filter: Checks if the transaction's vendor (converted to lowercase)
             // contains the user's search term (converted to lowercase).
             if (t.getVendor().toLowerCase().contains(vendorSearch.toLowerCase())){
-                System.out.println(t.getDate().toString() + "\t" +
-                        t.getTime().toString() + "\t" +
-                        t.getDescription() + "\t\t" +
-                        t.getVendor() + "\t\t" + t.getAmount());
+                System.out.println(t.getDate().toString() + "|" +
+                        t.getTime().toString() + "|" +
+                        t.getDescription() + "|" +
+                        t.getVendor() + "|" + t.getAmount());
                 found = true;
             }
         }
