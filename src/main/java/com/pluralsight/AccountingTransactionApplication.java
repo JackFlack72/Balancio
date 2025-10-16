@@ -4,7 +4,6 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -52,7 +51,7 @@ public class AccountingTransactionApplication {
                     running = false;
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Invalid choice. Please enter a valid choice.");
             }
 
             System.out.println(); // blank line for spacing
@@ -90,7 +89,12 @@ public class AccountingTransactionApplication {
             LocalDate date = now.toLocalDate();
             LocalTime time = now.toLocalTime();
 
-            Transaction newT = new Transaction(date, time, description, vendor, amount);
+            Transaction newT = new Transaction();
+            newT.setDate(date);
+            newT.setTime(time);
+            newT.setDescription(description);
+            newT.setVendor(vendor);
+            newT.setAmount(amount);
             // create a FileWriter
             FileWriter fileWriter = new FileWriter("transactions.csv", true);
             // create a BufferedWriter
@@ -101,7 +105,7 @@ public class AccountingTransactionApplication {
             // close the writer
             bufferedWriter.close();
 
-            System.out.println("Recorded: " + newT.toFileFormat());
+         //   System.out.println("Recorded: " + newT.toFileFormat());
         } catch (IOException e) {
             System.out.println("ERROR: An unexpected error occurred");
             e.getStackTrace();
@@ -151,6 +155,8 @@ public class AccountingTransactionApplication {
 
     public static void displayLedgerScreen() {
         while (true) {
+            ArrayList<Transaction> transactions = readTransactions();
+
             System.out.println("\n--- Ledger Screen ---");
             System.out.println("A) All Entries");
             System.out.println("D) Deposits");
@@ -158,9 +164,190 @@ public class AccountingTransactionApplication {
             System.out.println("R) Reports");
             System.out.println("H) Home Screen");
             System.out.println("Choose an option:  ");
+            String choice = scanner.nextLine();
 
+            String nextChoice = "";
+            switch (choice) {
+                case "A":
+                    nextChoice = "All";
+                    break;
+                case "D":
+                    nextChoice = "Deposit";
+                    break;
+                case "P":
+                    nextChoice = "Payment";
+                    break;
+                case "R":
+                    displayReportsScreen();
+                    continue;
+                case "H":
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please enter a valid choice.");
+                    continue;
+            }
+            System.out.println("\n--- Ledger Entries (" + nextChoice + ") ---");
+            System.out.println("Date|Time|Description|Vendor|Amount");
+
+            for (Transaction t : transactions) {
+                double amount = t.getAmount();
+                boolean displays = false;
+
+                switch (nextChoice) {
+                    case "All":
+                        displays = true;
+                        break;
+                    case "Deposit":
+                        if (amount > 0) {
+                            displays = true;
+                        }
+                        break;
+                    case "Payment":
+                        if (amount < 0) {
+                            displays = true;
+                        }
+                        break;
+                }
+                if (displays) {
+                    System.out.println(t.getDate().toString() + "|" +
+                            t.getTime().toString() + "|" +
+                            t.getDescription() + "|" +
+                            t.getVendor() + "|" +
+                            t.getAmount());
+                }
+            }
+        }
+    }
+
+    public static void displayReportsScreen() {
+        while (true) {
+            System.out.println("\n--- Reports Screen ---");
+            System.out.println("1) Month To Date");
+            System.out.println("2) Previous Month");
+            System.out.println("3) Year To Date");
+            System.out.println("4) Previous Year");
+            System.out.println("5) Search by Vendor");
+            System.out.println("0) Back to Ledger");
+            System.out.println("Enter your choice: ");
+
+            String input = scanner.nextLine();
+
+            ArrayList<Transaction> allTransactions = readTransactions();
+            LocalDate today = LocalDate.now();
+
+            String reportName = "";
+            LocalDate startDate = null;
+            LocalDate endDate = null;
+
+            switch(input) {
+                case "1": // Month To Date (MTD)
+                    reportName = "Month To Date";
+                    // Start on the 1st of the current month
+                    startDate = today.withDayOfMonth(1);
+                    endDate = today;
+                    break;
+                case "2": // Previous Month (PM)
+                    reportName = "Previous Month";
+                    // Move to the previous month
+                    LocalDate previousMonth = today.minusMonths(1);
+                    // Start: 1st day of the previous month
+                    startDate = previousMonth.withDayOfMonth(1);
+                    // End: Last day of the previous month
+                    endDate = previousMonth.withDayOfMonth(previousMonth.lengthOfMonth());
+                    break;
+                case "3": // Year To Date (YTD)
+                    reportName = "Year To Date";
+                    // Start on the 1st day of the current year
+                    startDate = today.withDayOfYear(1);
+                    endDate = today;
+                    break;
+                case "4": // Previous Year (PY)
+                    reportName = "Previous Year";
+                    // Move to the previous year
+                    LocalDate previousYear = today.minusYears(1);
+                    // Start: 1st day of the previous year
+                    startDate = previousYear.withDayOfYear(1);
+                    // End: Last day of the previous year
+                    endDate = previousYear.withDayOfYear(previousYear.lengthOfYear());
+                    break;
+                    //*/
+            }
+            // --- FILTERING AND DISPLAY LOGIC for MTD, PM, YTD, PY ---
+
+            double totalDeposits = 0;
+            double totalPayments = 0;
+            boolean found = false;
+
+            System.out.printf("\n--- %s Report (%s to %s) ---\n",
+                    reportName,
+                    startDate.toString(),
+                    endDate.toString());
+
+            System.out.println("Date|Time|Description|Vendor|Amount");
+            System.out.println("-------------------------------------------------------------------------------------------------");
+
+            for (Transaction t : allTransactions) {
+                LocalDate transactionDate = t.getDate();
+
+                // Check if the transaction date is within the inclusive range: [startDate, endDate]
+                if (!transactionDate.isBefore(startDate) && !transactionDate.isAfter(endDate)) {
+                    double amount = t.getAmount();
+                    found = true;
+
+                    // Display transaction details
+                    System.out.println(t.getDate().toString() + "|" +
+                            t.getTime().toString() + "|" +
+                            t.getDescription() + "|" +
+                            t.getVendor() + "|" +
+                            String.format("%.2f", t.getAmount()));
+
+                    if (amount > 0) {
+                        totalDeposits += amount;
+                    } else {
+                        totalPayments += amount;
+                    }
+                }
+            }
+
+            if (!found) {
+                System.out.println("No transactions found in this date range.");
+            } else {
+                // Print the summary after the transaction list
+                System.out.printf("Total Deposits: $%.2f\n", totalDeposits);
+                System.out.printf("Total Payments: $%.2f\n", totalPayments);
+                System.out.printf("Net Change: $%.2f\n", totalDeposits + totalPayments);
+            }
+            System.out.println("\nPress Enter to continue...");
+            scanner.nextLine();
 
         }
     }
-//*/
+
+    public static void searchByVendor() {
+        System.out.println("Enter the Vendor Name to search: ");
+        String vendorSearch = scanner.nextLine().trim();
+
+        ArrayList<Transaction> allTransactions = readTransactions();
+
+        System.out.println("\n--- Vendor Results: " + vendorSearch + "---");
+        boolean found = false;
+
+        System.out.println("Date\t\tTime\t\tDescription\t\tVendor\t\tAmount");
+
+        for (Transaction t: allTransactions) {
+            if (t.getVendor().toLowerCase().contains(vendorSearch.toLowerCase())){
+                System.out.println(t.getDate().toString() + "\t" +
+                        t.getTime().toString() + "\t" +
+                        t.getDescription() + "\t\t" +
+                        t.getVendor() + "\t\t" + t.getAmount());
+            found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No transactions found for : " + vendorSearch);
+        }
+        System.out.println("\nPress Enter to Continue: ");
+        scanner.nextLine();
+    }
 }

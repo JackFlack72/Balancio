@@ -16,7 +16,7 @@ public class Transaction {
     private String description;
     private String vendor;
     private double amount;       // Stored as a 'double' for precision.
-
+/*
     // --- Constructor 1: Full-Parameter Initialization ---
     // Used to create a Transaction object with all data provided at once.
     public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount) {
@@ -27,7 +27,7 @@ public class Transaction {
         this.vendor = vendor;
         this.amount = amount;
     }
-
+*/
     // --- Constructor 2: Default Initialization (Empty) ---
     // Allows creation of an object with default/zeroed values, to be set later.
     public Transaction() {
