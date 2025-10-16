@@ -96,10 +96,9 @@ public class Transaction {
         }
     }
 
-    // --- toString() Override: Printable Representation ---
     // Overrides the default method to provide a custom, human-readable string.
-    public String toString() {
+    public String toFileFormat() {
         // Formats the data into a pipe-separated string for easy output/storage.
-        return this.date + "|" + this.time + "|" + this.description + "|" + this.vendor + "|" + this.amount;
+        return date.toString() + "|" + time.toString() + "|" + this.description + "|" + this.vendor + "|" + this.amount;
     }
 }

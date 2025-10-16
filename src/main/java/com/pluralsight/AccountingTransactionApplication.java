@@ -15,61 +15,15 @@ public class AccountingTransactionApplication {
     public static void main(String[] args) {
 
        ArrayList<Transaction> transaction = readTransactions();
-
+/*
         for (Transaction t: transaction) {
             System.out.println(t);
         }
+*/
+
+        homeScreen();
 
     }
-
-    private static ArrayList<Transaction> readTransactions() {
-        ArrayList<Transaction> list = new ArrayList<>();
-        try {
-            // create a FileReader object connected to the File
-            FileReader fileReader = new FileReader("transactions.csv");
-            // create a BufferedReader to manage input stream
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line;
-
-            //skip header line
-            bufferedReader.readLine();
-
-
-            // read until there is no more data
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] parts = line.split(Pattern.quote("|"));
-
-                Transaction transaction = new Transaction();
-
-                String dateAsString = parts[0];
-                LocalDate date = LocalDate.parse(dateAsString);
-                transaction.setDate(date);
-
-                String timeAsString = parts[1];
-                LocalTime time = LocalTime.parse(timeAsString);
-                transaction.setTime(time);
-
-                String description = parts[2];
-                transaction.setDescription(description);
-
-                String vendor = parts[3];
-                transaction.setVendor(vendor);
-
-                String amountAsString = parts[4];
-                double amount = Double.parseDouble(amountAsString);
-                transaction.setAmount(amount);
-
-                list.add(transaction);
-            }
-            // close the stream and release the resources
-            bufferedReader.close();
-        } catch (IOException e) {
-            // display stack trace if there was an error
-            e.printStackTrace();
-        }
-        return list;
-    }
-
 
     public static void homeScreen() {
         boolean running = true;
@@ -106,14 +60,16 @@ public class AccountingTransactionApplication {
     }
 
     public static void addDeposit() {
-        makeTransaction(true);
+        System.out.println("\n--- Add Deposit ---");
+        addTransaction(true);
     }
 
     public static void makePayment() {
-        makeTransaction(false);
+        System.out.println("\n--- Make Payment ---");
+        addTransaction(false);
     }
 
-    public static void makeTransaction(boolean isDeposit) {
+    public static void addTransaction(boolean isDeposit) {
         try {
             System.out.println("Description: ");
             String description = scanner.nextLine();
@@ -129,9 +85,10 @@ public class AccountingTransactionApplication {
             } else {
                 amount = Math.abs(amount);
             }
+
             LocalDateTime now = LocalDateTime.now();
-            LocalDate date = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            LocalTime time = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+            LocalDate date = now.toLocalDate();
+            LocalTime time = now.toLocalTime();
 
             Transaction newT = new Transaction(date, time, description, vendor, amount);
             // create a FileWriter
@@ -139,21 +96,62 @@ public class AccountingTransactionApplication {
             // create a BufferedWriter
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             // write to the file
-            bufferedWriter.write(newT.toString());
+            bufferedWriter.write(newT.toFileFormat());
             bufferedWriter.newLine();
             // close the writer
             bufferedWriter.close();
 
-            System.out.println("Recorded: " + newT.toString());
+            System.out.println("Recorded: " + newT.toFileFormat());
         } catch (IOException e) {
             System.out.println("ERROR: An unexpected error occurred");
             e.getStackTrace();
         }
     }
 
+    private static ArrayList<Transaction> readTransactions() {
+        ArrayList<Transaction> list = new ArrayList<>();
+        try {
+            // create a FileReader object connected to the File
+            FileReader fileReader = new FileReader("transactions.csv");
+            // create a BufferedReader to manage input stream
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+
+            //skip header line
+            bufferedReader.readLine();
+
+
+            // read until there is no more data
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] parts = line.split(Pattern.quote("|"));
+
+                Transaction transaction = new Transaction();
+
+                transaction.setDate(LocalDate.parse(parts[0]));
+
+                transaction.setTime(LocalTime.parse(parts[1]));
+
+                transaction.setDescription(parts[2]);
+
+                transaction.setVendor(parts[3]);
+
+                transaction.setAmount(Double.parseDouble(parts[4]));
+
+                list.add(transaction);
+            }
+            // close the stream and release the resources
+            bufferedReader.close();
+        } catch (IOException e) {
+            // display stack trace if there was an error
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
     public static void displayLedgerScreen() {
         while (true) {
-            System.out.println("\n--- LEDGER SCREEN ---");
+            System.out.println("\n--- Ledger Screen ---");
             System.out.println("A) All Entries");
             System.out.println("D) Deposits");
             System.out.println("P) Payments");
