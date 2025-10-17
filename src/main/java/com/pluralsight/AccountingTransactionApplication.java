@@ -1,3 +1,6 @@
+//Carriage Return Bug
+
+
 // Package structure: Organizes application files.
 package com.pluralsight;
 
@@ -243,7 +246,6 @@ public class AccountingTransactionApplication {
             System.out.println("5) Search by Vendor");
             System.out.println("0) Back to Ledger");
             System.out.println("Enter your choice: ");
-
             String input = scanner.nextLine();
 
             ArrayList<Transaction> allTransactions = readTransactions();
@@ -338,6 +340,7 @@ public class AccountingTransactionApplication {
             }
             System.out.println("\nPress Enter to continue...");
             scanner.nextLine();
+            scanner.nextLine();
         }
     }
 
@@ -354,8 +357,7 @@ public class AccountingTransactionApplication {
         System.out.println("Date|Time|Description|Vendor|Amount");
 
         for (Transaction t: allTransactions) {
-            // Filter: Checks if the transaction's vendor (converted to lowercase)
-            // contains the user's search term (converted to lowercase).
+            // Filter: Checks if the transaction's vendor contains the user's search term (converted to lowercase).
             if (t.getVendor().toLowerCase().contains(vendorSearch.toLowerCase())){
                 System.out.println(t.getDate().toString() + "|" +
                         t.getTime().toString() + "|" +
