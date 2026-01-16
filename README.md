@@ -10,7 +10,7 @@
 * [Project Overview](#project-overview)
 * [Features](#features)
 * [Technologies Used](#technologies-used)
-* [Getting Started](#Getting-Started-🏁)
+* [Getting Started](#getting-started-)
 
 ---
 
