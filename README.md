@@ -5,12 +5,13 @@
 * **Malik Canteberry**
 * **Malika Taitelieva**
 * **Marianna Aspuria**
-
+---
 ## Table of Contents
 * [Project Overview](#project-overview)
 * [Features](#features)
 * [Technologies Used](#technologies-used)
-* [Getting Started](#getting-started)
+* [Getting Started](#Getting-Started-🏁)
+
 ---
 
 ## Project Overview
@@ -21,7 +22,7 @@ Instead of a messy spreadsheet, Balancio gives you a structured way to keep your
 
 ---
 
-## Features
+## Features & Screens
 
 Balancio provides the essential tools for insightful financial tracking:
 
@@ -29,11 +30,38 @@ Balancio provides the essential tools for insightful financial tracking:
 * **Category-Based Tracking:** Transactions can be organized into categories (e.g., Groceries, Rent, Salary) for better analysis.
 * **Financial Summary:** View a real-time summary of your current balance.
 
+##### 🎮 How it Works: Navigating Balancio
+
+Balancio is organized into three main screens to keep your workflow simple. Here is a breakdown of what you can do in each:
+
+### 🏠 Home Screen
+This is your starting point. From here, you can quickly log money coming in or going out.
+* **[D] Add Deposit:** Log your income (Salary, Gifts, etc.).
+* **[P] Make Payment:** Log your expenses (Rent, Groceries, etc.).
+* **[L] Ledger:** Jump into your transaction history.
+* **[X] Exit:** Safely close the application.
+
+INSERT IMAGE HERE
+
+### 📒 Ledger Screen
+The Ledger is your "Command Center" for viewing history. By default, it shows your newest transactions first.
+* **[A] All:** See every single transaction in your history.
+* **[D] Deposits:** Filter to see only your income.
+* **[P] Payments:** Filter to see only your spending.
+* **[R] Reports:** Move to the advanced analysis screen.
+* **[H] Home:** Go back to the main menu.
+
+INSERT IMAGE HERE
+
+
+
 ---
 
 ## Technologies Used
 
 This project is primarily built using the **Java** programming language and managed with **Maven**.
+
+---
 
 ##  Getting Started 🏁
 
