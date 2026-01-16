@@ -1,5 +1,7 @@
 # Balancio: Financial Tracker Application 💰
 
+![Balancio Logo.png](Balancio%20Logo.png)
+
 ## 👥 Meet the Team: L.M.³ Dev Group
 * **Lucas Rappatta**
 * **Malik Canteberry**
