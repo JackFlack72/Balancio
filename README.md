@@ -45,7 +45,7 @@ This project is primarily built using the **Java** programming language and mana
 1. **Download the code:**
    ```bash
    git clone [https://github.com/your-username/balancio.git](https://github.com/your-username/balancio.git)
-2. **Open the project in IntelliJ:**
+2. **Open the project in IntelliJ**
 3. **Follow the file path:**
    `src/main/java/com/pluralsight/AccountingTransactionApplication.java`
 4. **Navigate to Run Bar:**
