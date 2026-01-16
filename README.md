@@ -41,7 +41,7 @@ This is your starting point. From here, you can quickly log money coming in or g
 * **[L] Ledger:** Jump into your transaction history.
 * **[X] Exit:** Safely close the application.
 
-INSERT IMAGE HERE
+![Home Screen Capstone 1.png](Home%20Screen%20Capstone%201.png)
 
 ### 📒 Ledger Screen
 The Ledger is your hub for viewing history. By default, it shows your newest transactions first.
@@ -51,14 +51,14 @@ The Ledger is your hub for viewing history. By default, it shows your newest tra
 * **[R] Reports:** Move to the advanced analysis screen.
 * **[H] Home:** Go back to the main menu.
 
-INSERT IMAGE HERE
+![Ledger Screen with Transaction Capstone 1.png](Ledger%20Screen%20with%20Transaction%20Capstone%201.png)
 
 ### 📊 Reports Screen
 This is where you get into the details. We built filters to help you see your habits over time.
 * **Standard Reports:** Quickly pull data for **Month To Date**, **Previous Month**, **Year To Date**, or the **Previous Year**.
 * **Search by Vendor:** Type in a name (like "Amazon") to see exactly how much you've spent there.
 
-INSERT IMAGE HERE
+![Reports Screen with Custom Search.png](Reports%20Screen%20with%20Custom%20Search.png)
 
 ---
 

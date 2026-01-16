@@ -1009,3 +1009,5 @@ date|time|description|vendor|amount
 2026-01-16|11:32:42|test|test|10000.0
 2026-01-16|11:33:01|tset|test|-888.0
 2026-01-16|11:39:54|tfds|efd|284798.0
+2026-01-16|12:04:55|Test|YearUp|1.0
+2026-01-16|12:05:19|Test|YearUp|-1.0
