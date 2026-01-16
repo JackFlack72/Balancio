@@ -58,6 +58,8 @@ This is where you get into the details. We built filters to help you see your ha
 * **Standard Reports:** Quickly pull data for **Month To Date**, **Previous Month**, **Year To Date**, or the **Previous Year**.
 * **Search by Vendor:** Type in a name (like "Amazon") to see exactly how much you've spent there.
 
+INSERT IMAGE HERE
+
 ---
 
 ## Technologies Used
