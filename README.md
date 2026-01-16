@@ -49,5 +49,5 @@ This project is primarily built using the **Java** programming language and mana
 3. **Follow the file path:**
    `src/main/java/com/pluralsight/AccountingTransactionApplication.java`
 4. **Navigate to Run Bar:**
-    ![Run Bar Capstone 1.png](../Run%20Bar%20Capstone%201.png)
-5. 
+* Click on Green Triangle to the Right of Run/Debug Configurations
+![Run Bar Capstone 1.png](../Run%20Bar%20Capstone%201.png)
