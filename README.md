@@ -44,7 +44,7 @@ This is your starting point. From here, you can quickly log money coming in or g
 INSERT IMAGE HERE
 
 ### 📒 Ledger Screen
-The Ledger is your "Command Center" for viewing history. By default, it shows your newest transactions first.
+The Ledger is your hub for viewing history. By default, it shows your newest transactions first.
 * **[A] All:** See every single transaction in your history.
 * **[D] Deposits:** Filter to see only your income.
 * **[P] Payments:** Filter to see only your spending.
